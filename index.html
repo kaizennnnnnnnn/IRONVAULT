@@ -650,6 +650,48 @@ details.faq[open]{
       .reveal{ opacity:1; transform:none; transition:none; }
       .btn:hover, .chipbtn:hover{ transform:none; }
     }
+    /* Keep HERO text readable in BOTH themes (hero sits on a dark image) */
+.hero .content{
+  color: rgba(255,255,255,.94);
+}
+
+.hero .content h1{
+  color: rgba(255,255,255,.98);
+}
+
+.hero .content .lead{
+  color: rgba(255,255,255,.82);
+}
+
+/* Make hero "ghost" buttons readable on the image */
+.hero .content .btn.ghost{
+  color: rgba(255,255,255,.92);
+  border-color: rgba(255,255,255,.22);
+  background: rgba(0,0,0,.18);
+}
+.hero .content .btn.ghost:hover{
+  background: rgba(0,0,0,.28);
+}
+
+/* Stats readability */
+.hero .content .stat{
+  background: rgba(0,0,0,.26);
+  border-color: rgba(255,255,255,.16);
+}
+.hero .content .stat span{
+  color: rgba(255,255,255,.72);
+}
+
+/* Badge: keep it consistent even in light theme */
+html[data-theme="light"] .hero .badge{
+  background: rgba(0,0,0,.28);
+  border-color: rgba(255,255,255,.16);
+  color: rgba(255,255,255,.82);
+}
+/* Keep primary CTA text white on the HERO in both themes */
+.hero .content .btn.primary{
+  color: rgba(255,255,255,.96);
+}
   </style>
 </head>
 
