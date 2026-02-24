@@ -1,9 +1,9 @@
 <!doctype html>
-<html lang="sr">
+<html lang="en">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <meta name="description" content="Profesionalna teretana — programi, treneri, raspored, članarine i kontakt." />
+  <meta name="description" content="IRONVAULT GYM — strength, conditioning, coaching and memberships." />
   <meta name="theme-color" content="#0a0d12" />
   <title>IRONVAULT GYM — High Performance Training</title>
 
@@ -11,26 +11,26 @@
     :root{
       --bg: #0a0d12;
       --bg2:#0f1520;
-      --text: rgba(255,255,255,.90);
-      --muted: rgba(255,255,255,.66);
-      --faint: rgba(255,255,255,.46);
+
+      --text: rgba(255,255,255,.92);
+      --muted: rgba(255,255,255,.68);
 
       --panel: rgba(255,255,255,.06);
       --panel2: rgba(255,255,255,.10);
       --border: rgba(255,255,255,.12);
 
-      /* NEW character palette (industrial + neon lime) */
       --accent: #b6ff4d;     /* neon lime */
       --accent2:#ff7a18;     /* warm orange */
-      --accent3:#7c3aed;     /* purple spark */
+      --accent3:#7c3aed;     /* purple */
 
       --shadow: 0 18px 45px rgba(0,0,0,.40);
       --radius: 18px;
 
       --max: 1180px;
       --pad: clamp(16px, 3vw, 28px);
-      --h1: clamp(34px, 5vw, 60px);
-      --h2: clamp(22px, 3.2vw, 36px);
+
+      --h1: clamp(30px, 4.4vw, 54px);
+      --h2: clamp(22px, 3.2vw, 34px);
       --h3: clamp(16px, 2vw, 20px);
       --p:  clamp(15px, 1.6vw, 17px);
     }
@@ -40,7 +40,6 @@
       --bg2:#ffffff;
       --text: rgba(2,6,23,.90);
       --muted: rgba(2,6,23,.65);
-      --faint: rgba(2,6,23,.45);
       --panel: rgba(2,6,23,.06);
       --panel2: rgba(2,6,23,.09);
       --border: rgba(2,6,23,.12);
@@ -57,13 +56,13 @@
       letter-spacing:.2px;
       overflow-x:hidden;
 
-      /* NEW background character: grid + stripes + glow */
       background:
         radial-gradient(900px 500px at 15% -10%, rgba(182,255,77,.18), transparent 55%),
         radial-gradient(900px 500px at 95% 10%, rgba(255,122,24,.16), transparent 55%),
         radial-gradient(900px 600px at 65% 110%, rgba(124,58,237,.14), transparent 55%),
         linear-gradient(180deg, var(--bg), var(--bg2));
     }
+
     body::before{
       content:"";
       position: fixed; inset:0;
@@ -75,8 +74,8 @@
       background-size: 64px 64px;
       mix-blend-mode: overlay;
     }
+
     body::after{
-      /* subtle diagonal stripes */
       content:"";
       position: fixed; inset:-200px;
       pointer-events:none;
@@ -102,44 +101,73 @@
       overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0;
     }
 
-    .skip{
-      position:absolute; left:-999px; top:10px;
-      padding:10px 14px; border-radius:999px;
-      background: var(--panel2);
-      border: 1px solid var(--border);
-      z-index:9999;
-    }
-    .skip:focus{ left:14px; outline:none; box-shadow: 0 0 0 5px rgba(182,255,77,.22); }
+    /* Fixed header spacer so content doesn't jump under it */
+    .header-spacer{ height: 78px; }
+    @media (max-width: 920px){ .header-spacer{ height: 74px; } }
 
+    section{ scroll-margin-top: 92px; } /* anchors won't hide behind fixed header */
+
+    /* Header (FIXED always visible) */
     header{
-      position: sticky; top:0; z-index: 60;
+      position: fixed;
+      top:0; left:0; right:0;
+      z-index: 999;
       backdrop-filter: blur(10px);
-      background: linear-gradient(to bottom, rgba(0,0,0,.45), rgba(0,0,0,0));
-      border-bottom: 1px solid rgba(255,255,255,.08);
+      -webkit-backdrop-filter: blur(10px);
+      border-bottom: 1px solid rgba(255,255,255,.10);
+      background: rgba(10,13,18,.38);
+      transition: background .18s ease, box-shadow .18s ease, border-color .18s ease;
     }
+
     html[data-theme="light"] header{
-      background: linear-gradient(to bottom, rgba(247,250,252,.92), rgba(247,250,252,.55));
+      background: rgba(247,250,252,.78);
       border-bottom: 1px solid rgba(2,6,23,.10);
+    }
+
+    header.scrolled{
+      background: rgba(10,13,18,.78);
+      box-shadow: 0 12px 30px rgba(0,0,0,.22);
+      border-bottom-color: rgba(255,255,255,.14);
+    }
+    html[data-theme="light"] header.scrolled{
+      background: rgba(247,250,252,.92);
+      border-bottom-color: rgba(2,6,23,.12);
+      box-shadow: 0 12px 30px rgba(2,6,23,.10);
     }
 
     .nav{
       display:flex; align-items:center; justify-content: space-between;
       gap: 14px; padding: 14px 0;
     }
+
     .brand{
       display:flex; align-items:center; gap: 10px;
       font-weight: 950; letter-spacing: .8px; text-transform: uppercase;
     }
-    .logo{
-      width: 40px; height: 40px; border-radius: 14px;
-      background:
-        radial-gradient(circle at 30% 30%, var(--accent), transparent 60%),
-        radial-gradient(circle at 70% 30%, var(--accent2), transparent 60%),
-        rgba(255,255,255,.08);
-      border: 1px solid var(--border);
-      box-shadow: 0 12px 28px rgba(0,0,0,.25);
-      overflow:hidden;
-    }
+
+    /* Logo square now supports image */
+    /* Bigger logo square */
+.logo{
+  width: 52px;
+  height: 52px;
+  border-radius: 16px;
+  border: 1px solid var(--border);
+  box-shadow: 0 12px 28px rgba(0,0,0,.25);
+  overflow:hidden;
+  background:
+    radial-gradient(circle at 30% 30%, var(--accent), transparent 60%),
+    radial-gradient(circle at 70% 30%, var(--accent2), transparent 60%),
+    rgba(255,255,255,.08);
+  display:grid;
+  place-items:center;
+  flex: 0 0 auto;
+}
+.logo img{
+  width:100%;
+  height:100%;
+  object-fit: cover; /* popuni kocku */
+  display:block;
+}
 
     nav .links{
       display:flex; align-items:center; gap: 10px;
@@ -151,7 +179,7 @@
       border-radius: 999px;
       border: 1px solid transparent;
       font-size: 14px;
-      font-weight: 750;
+      font-weight: 800;
     }
     nav .links a:hover{
       color: var(--text);
@@ -181,9 +209,8 @@
       background: linear-gradient(135deg, rgba(182,255,77,.22), rgba(255,122,24,.18));
       border-color: rgba(182,255,77,.30);
     }
-    .btn.ghost{
-      background: transparent;
-    }
+    .btn.ghost{ background: transparent; }
+
     .icon{ width: 16px; height: 16px; display:inline-block; }
 
     /* Mobile menu */
@@ -213,10 +240,10 @@
       border-color: var(--border);
     }
 
-    /* Hero (NEW: full-bleed poster style) */
+    /* HERO */
     .hero{
       position: relative;
-      padding: clamp(44px, 7vw, 88px) 0 34px;
+      padding: clamp(30px, 4.5vw, 60px) 0 34px;
     }
     .hero .poster{
       border-radius: calc(var(--radius) + 6px);
@@ -230,7 +257,7 @@
       content:"";
       position:absolute; inset:0;
       background:
-        linear-gradient(90deg, rgba(0,0,0,.70), rgba(0,0,0,.20) 60%, rgba(0,0,0,.55)),
+        linear-gradient(90deg, rgba(0,0,0,.72), rgba(0,0,0,.18) 60%, rgba(0,0,0,.58)),
         radial-gradient(900px 420px at 15% 20%, rgba(182,255,77,.18), transparent 60%),
         radial-gradient(900px 420px at 85% 10%, rgba(255,122,24,.14), transparent 60%);
       z-index: 2;
@@ -247,7 +274,7 @@
       position:absolute; inset: 0;
       z-index: 3;
       display:grid;
-      grid-template-columns: 1.05fr .95fr;
+      grid-template-columns: 1.1fr .9fr;
       gap: 16px;
       align-items: end;
       padding: clamp(18px, 3vw, 28px);
@@ -259,16 +286,16 @@
     .badge{
       display:inline-flex; align-items:center; gap: 8px;
       border: 1px solid rgba(255,255,255,.16);
-      background: rgba(0,0,0,.30);
+      background: rgba(0,0,0,.28);
       padding: 6px 10px;
       border-radius: 999px;
-      color: rgba(255,255,255,.78);
+      color: rgba(255,255,255,.82);
       font-size: 13px;
       width: fit-content;
       backdrop-filter: blur(10px);
     }
     html[data-theme="light"] .badge{
-      background: rgba(255,255,255,.55);
+      background: rgba(255,255,255,.62);
       border-color: rgba(2,6,23,.12);
       color: var(--muted);
     }
@@ -282,12 +309,12 @@
       font-size: var(--h1);
       margin: 12px 0 10px;
       line-height: 1.02;
-      letter-spacing: -1.2px;
-      text-transform: uppercase;
+      letter-spacing: -1px;
+      text-transform: none;
     }
     .lead{
       font-size: var(--p);
-      color: rgba(255,255,255,.78);
+      color: rgba(255,255,255,.80);
       margin: 0 0 16px;
       max-width: 62ch;
     }
@@ -306,12 +333,12 @@
     .stat{
       border-radius: 16px;
       border: 1px solid rgba(255,255,255,.16);
-      background: rgba(0,0,0,.30);
+      background: rgba(0,0,0,.26);
       padding: 14px;
       backdrop-filter: blur(10px);
     }
     html[data-theme="light"] .stat{
-      background: rgba(255,255,255,.55);
+      background: rgba(255,255,255,.62);
       border-color: rgba(2,6,23,.12);
     }
     .stat b{ display:block; font-size: 18px; }
@@ -347,6 +374,32 @@
       padding: 18px;
       box-shadow: var(--shadow);
     }
+    /* FAQ */
+.faq summary{
+  list-style:none;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content: space-between;
+  gap: 12px;
+  font-weight: 950;
+  text-transform: uppercase;
+  letter-spacing: .4px;
+  font-size: 14px;
+}
+.faq summary::-webkit-details-marker{ display:none; }
+.faq p{
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 14px;
+}
+details.faq{
+  padding: 18px;
+}
+details.faq[open]{
+  border-color: rgba(182,255,77,.30);
+  background: linear-gradient(180deg, rgba(182,255,77,.08), rgba(255,255,255,.02));
+}
     .pill{
       display:inline-flex; align-items:center; gap: 8px;
       font-size: 12px;
@@ -366,40 +419,6 @@
     .feature h3{ margin: 10px 0 6px; font-size: var(--h3); text-transform: uppercase; }
     .feature p{ margin:0; color: var(--muted); font-size: 14px; }
     .feature .top{ display:flex; align-items:center; justify-content: space-between; gap: 10px; }
-
-    /* About */
-    .about{
-      display:grid;
-      grid-template-columns: 1.1fr .9fr;
-      gap: 14px;
-      align-items: stretch;
-    }
-    @media (max-width: 980px){ .about{ grid-template-columns: 1fr; } }
-    .about-media{
-      padding:0; overflow:hidden; position:relative;
-      min-height: 330px;
-    }
-    .about-media::before{
-      content:"";
-      position:absolute; inset:0;
-      background: linear-gradient(0deg, rgba(0,0,0,.62), rgba(0,0,0,.10));
-      z-index:2; pointer-events:none;
-    }
-    .about-media img{ width:100%; height:100%; object-fit: cover; filter: contrast(1.06) saturate(1.05); }
-
-    /* Trainers */
-    .trainer{ padding:0; overflow:hidden; }
-    .trainer .imgwrap{
-      height: 240px;
-      position: relative;
-      overflow:hidden;
-      border-bottom: 1px solid var(--border);
-    }
-    .trainer img{ width:100%; height:100%; object-fit: cover; filter: contrast(1.06) saturate(1.05); }
-    .trainer .body{ padding: 16px 18px 18px; }
-    .trainer h3{ margin: 0 0 6px; text-transform: uppercase; }
-    .trainer p{ margin:0; color: var(--muted); font-size: 14px; }
-    .trainer .row{ margin-top: 10px; display:flex; gap: 8px; flex-wrap: wrap; }
 
     /* Schedule filter */
     .toolbar{ display:flex; gap: 10px; flex-wrap: wrap; align-items:center; margin: 12px 0 18px; }
@@ -431,15 +450,21 @@
     .class-item p{ margin: 6px 0 0; color: var(--muted); font-size: 14px; }
     .class-meta{ display:flex; gap: 8px; flex-wrap: wrap; margin-top: 10px; }
 
-    /* Pricing */
-    .price{ padding: 18px; }
-    .price h3{ margin: 0; font-size: 18px; text-transform: uppercase; }
-    .amount{ font-size: 42px; font-weight: 950; letter-spacing: -1px; margin: 10px 0 4px; }
-    .per{ color: var(--muted); font-weight: 900; font-size: 13px; }
-    .price ul{ margin: 12px 0 0; padding-left: 18px; color: var(--muted); }
-    .price li{ margin: 7px 0; }
-    .price .cta{ margin-top: 14px; width: 100%; }
+    /* Trainers */
+    .trainer{ padding:0; overflow:hidden; }
+    .trainer .imgwrap{
+      height: 240px;
+      position: relative;
+      overflow:hidden;
+      border-bottom: 1px solid var(--border);
+    }
+    .trainer img{ width:100%; height:100%; object-fit: cover; filter: contrast(1.06) saturate(1.05); }
+    .trainer .body{ padding: 16px 18px 18px; }
+    .trainer h3{ margin: 0 0 6px; text-transform: uppercase; }
+    .trainer p{ margin:0; color: var(--muted); font-size: 14px; }
+    .trainer .row{ margin-top: 10px; display:flex; gap: 8px; flex-wrap: wrap; }
 
+    /* Pricing toggle */
     .toggle{
       display:flex; align-items:center; gap: 10px;
       padding: 8px;
@@ -468,6 +493,15 @@
       transition: transform .18s ease;
     }
     .switch[aria-checked="true"] .knob{ transform: translateX(22px); }
+
+    /* Pricing cards */
+    .price{ padding: 18px; }
+    .price h3{ margin: 0; font-size: 18px; text-transform: uppercase; }
+    .amount{ font-size: 42px; font-weight: 950; letter-spacing: -1px; margin: 10px 0 4px; }
+    .per{ color: var(--muted); font-weight: 900; font-size: 13px; }
+    .price ul{ margin: 12px 0 0; padding-left: 18px; color: var(--muted); }
+    .price li{ margin: 7px 0; }
+    .price .cta{ margin-top: 14px; width: 100%; }
 
     /* Gallery */
     .gallery{
@@ -503,7 +537,7 @@
       display:none;
       align-items:center; justify-content:center;
       padding: 20px;
-      z-index: 200;
+      z-index: 2000;
     }
     .lightbox.open{ display:flex; }
     .lightbox .box{
@@ -527,23 +561,6 @@
       display:grid; place-items:center;
     }
 
-    /* FAQ */
-    .faq details{
-      border: 1px solid var(--border);
-      background: rgba(255,255,255,.04);
-      border-radius: 16px;
-      padding: 14px 14px;
-    }
-    html[data-theme="light"] .faq details{ background: rgba(2,6,23,.04); }
-    .faq summary{
-      cursor:pointer;
-      font-weight: 950;
-      list-style: none;
-      text-transform: uppercase;
-    }
-    .faq summary::-webkit-details-marker{ display:none; }
-    .faq p{ margin: 10px 0 0; color: var(--muted); font-size: 14px; }
-
     /* Contact */
     .contact{
       display:grid;
@@ -553,7 +570,11 @@
     }
     @media (max-width: 980px){ .contact{ grid-template-columns: 1fr; } }
 
-    label{ display:block; font-weight: 950; margin: 12px 0 6px; text-transform: uppercase; font-size: 12px; letter-spacing:.6px; color: var(--muted); }
+    label{
+      display:block; font-weight: 950; margin: 12px 0 6px;
+      text-transform: uppercase; font-size: 12px; letter-spacing:.6px;
+      color: var(--muted);
+    }
     input, textarea, select{
       width: 100%;
       padding: 12px 12px;
@@ -564,12 +585,40 @@
       font-size: 14px;
       outline:none;
     }
-    html[data-theme="light"] input, html[data-theme="light"] textarea, html[data-theme="light"] select{
+    html[data-theme="light"] input,
+    html[data-theme="light"] textarea,
+    html[data-theme="light"] select{
       background: rgba(2,6,23,.04);
+      color: rgba(2,6,23,.90);
     }
+
+    /* Make select dropdown readable */
+    select{
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      background-image:
+        linear-gradient(45deg, transparent 50%, var(--muted) 50%),
+        linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+      background-position:
+        calc(100% - 18px) 50%,
+        calc(100% - 12px) 50%;
+      background-size: 6px 6px, 6px 6px;
+      background-repeat: no-repeat;
+      padding-right: 36px;
+    }
+
+    option{
+      background: #0f1520;
+      color: rgba(255,255,255,.92);
+    }
+    html[data-theme="light"] option{
+      background: #ffffff;
+      color: rgba(2,6,23,.90);
+    }
+
     input:focus, textarea:focus, select:focus{ box-shadow: 0 0 0 5px rgba(182,255,77,.22); }
     textarea{ min-height: 130px; resize: vertical; }
-    .hint{ color: var(--muted); font-size: 13px; margin-top: 10px; }
 
     .success{
       display:none;
@@ -605,97 +654,100 @@
 </head>
 
 <body>
-  <a class="skip" href="#main">Preskoči na sadržaj</a>
-
-  <header>
+  <header id="siteHeader">
     <div class="container">
       <div class="nav">
-        <a class="brand" href="#top" aria-label="Početna">
-          <span class="logo" aria-hidden="true"></span>
+        <a class="brand" href="#top" aria-label="Home">
+          <span class="logo" aria-hidden="true">
+            <!-- Put your logo here: assets/logo.png -->
+            <img src="assets/logo.png" alt="" onerror="this.style.display='none';" />
+          </span>
           <span>IRONVAULT</span>
         </a>
 
-        <nav aria-label="Glavna navigacija">
+        <nav aria-label="Main navigation">
           <div class="links">
-            <a href="#programi">Programi</a>
-            <a href="#raspored">Raspored</a>
-            <a href="#treneri">Treneri</a>
-            <a href="#clanarine">Članarine</a>
-            <a href="#galerija">Galerija</a>
-            <a href="#kontakt">Kontakt</a>
+            <a href="#programs">Programs</a>
+            <a href="#schedule">Schedule</a>
+            <a href="#coaches">Coaches</a>
+            <a href="#memberships">Memberships</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#contact">Contact</a>
           </div>
         </nav>
 
         <div class="actions">
-          <button class="btn burger" id="burgerBtn" type="button" aria-label="Otvori meni" aria-expanded="false">
+          <button class="btn burger" id="burgerBtn" type="button" aria-label="Open menu" aria-expanded="false">
             <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M4 7h16M4 12h16M4 17h16" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
             </svg>
-            Meni
+            Menu
           </button>
 
-          <button class="btn" id="themeBtn" type="button" aria-label="Promeni temu">
+          <button class="btn" id="themeBtn" type="button" aria-label="Toggle theme">
             <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M12 18a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z" stroke="currentColor" stroke-width="2"/>
               <path d="M12 2v2M12 20v2M4 12H2M22 12h-2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
             </svg>
-            Tema
+            Theme
           </button>
 
-          <a class="btn primary cta" href="#kontakt">
+          <a class="btn primary cta" href="#contact">
             <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="M4 4h16v16H4V4Z" stroke="currentColor" stroke-width="2"/>
               <path d="m4 7 8 6 8-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            Prijavi se
+            Get Started
           </a>
         </div>
       </div>
 
-      <div class="mobile" id="mobileMenu" aria-label="Mobilna navigacija">
-        <a href="#programi">Programi</a>
-        <a href="#raspored">Raspored</a>
-        <a href="#treneri">Treneri</a>
-        <a href="#clanarine">Članarine</a>
-        <a href="#galerija">Galerija</a>
-        <a href="#kontakt">Kontakt</a>
+      <div class="mobile" id="mobileMenu" aria-label="Mobile navigation">
+        <a href="#programs">Programs</a>
+        <a href="#schedule">Schedule</a>
+        <a href="#coaches">Coaches</a>
+        <a href="#memberships">Memberships</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#contact">Contact</a>
       </div>
     </div>
   </header>
 
+  <div class="header-spacer" aria-hidden="true"></div>
+
   <main id="main">
-    <!-- HERO (NEW) -->
+    <!-- HERO -->
     <section class="hero" id="top">
       <div class="container">
         <div class="poster reveal">
-          <!-- ✅ UBACI SLIKU: assets/hero.jpg -->
-          <img src="assets/hero.jpg" alt="Trening u modernoj teretani" />
+          <!-- Hero image -->
+          <img src="assets/hero.jpg" alt="Modern gym training area" />
           <div class="content">
             <div>
-              <div class="badge"><span class="dot" aria-hidden="true"></span> High Performance Training • 24/7 (primer)</div>
-              <h1>Train like a pro.</h1>
+              <div class="badge"><span class="dot" aria-hidden="true"></span> Strength • Conditioning • Mobility</div>
+              <h1>High-Performance Training, Built for Results.</h1>
               <p class="lead">
-                Programi za snagu, kondiciju i estetiku — uz sistem koji prati napredak i drži te doslednim.
+                Structured programs, expert coaching, and a clean facility designed to help you build strength, improve conditioning, and stay consistent.
               </p>
               <div class="hero-cta">
-                <a class="btn primary" href="#clanarine">Članarine</a>
-                <a class="btn ghost" href="#raspored">Raspored</a>
-                <a class="btn ghost" href="#programi">Programi</a>
+                <a class="btn primary" href="#memberships">View Memberships</a>
+                <a class="btn ghost" href="#schedule">See Schedule</a>
+                <a class="btn ghost" href="#programs">Explore Programs</a>
               </div>
             </div>
 
             <div class="stats">
               <div class="stat">
-                <b>50+ zona</b>
-                <span>snaga • kardio • funkcionalna</span>
+                <b>Coaching-first</b>
+                <span>Technique, progression, accountability</span>
               </div>
               <div class="stat">
-                <b>4.9★</b>
-                <span>utisci članova (primer)</span>
+                <b>Smart programs</b>
+                <span>Strength, hypertrophy, conditioning</span>
               </div>
               <div class="stat">
-                <b>Plan & tracking</b>
-                <span>napredak, merenja, rutina</span>
+                <b>Modern facility</b>
+                <span>Zones for every training style</span>
               </div>
             </div>
           </div>
@@ -704,12 +756,12 @@
     </section>
 
     <!-- PROGRAMS -->
-    <section id="programi">
+    <section id="programs">
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <h2>Programi</h2>
-            <p>Tri “core” programa koji pokrivaju najčešće ciljeve članova.</p>
+            <h2>Programs</h2>
+            <p>Choose the approach that matches your goal — strength, body composition, or conditioning.</p>
           </div>
           <span class="pill">Beginner • Intermediate • Advanced</span>
         </div>
@@ -717,24 +769,26 @@
         <div class="grid3">
           <div class="card feature reveal">
             <div class="top">
-              <span class="pill">Snaga</span><span class="pill">3–5x</span>
+              <span class="pill">Strength</span><span class="pill">3–5x / week</span>
             </div>
             <h3>Strength Builder</h3>
-            <p>Osnovne vežbe + progres. Fokus na tehnici i realnom napretku bez povreda.</p>
+            <p>Fundamentals, technique, and progressive overload to build real strength safely.</p>
           </div>
+
           <div class="card feature reveal">
             <div class="top">
-              <span class="pill">Mršavljenje</span><span class="pill">45–60 min</span>
+              <span class="pill">Body comp</span><span class="pill">45–60 min</span>
             </div>
-            <h3>Lean & Fit</h3>
-            <p>Kombinacija snage i kondicije — održivo, jasno, merljivo.</p>
+            <h3>Lean & Strong</h3>
+            <p>Balanced training for performance and physique with consistent measurable progress.</p>
           </div>
+
           <div class="card feature reveal">
             <div class="top">
-              <span class="pill">Kondicija</span><span class="pill">HIIT</span>
+              <span class="pill">Conditioning</span><span class="pill">HIIT</span>
             </div>
-            <h3>Conditioning</h3>
-            <p>Intervali + circuit, skaliranje po nivou, brz napredak u izdržljivosti.</p>
+            <h3>Engine Room</h3>
+            <p>Intervals, circuits, and scalable conditioning sessions for every level.</p>
           </div>
         </div>
 
@@ -743,356 +797,390 @@
         <div class="grid2">
           <div class="card reveal">
             <span class="pill">Small group</span>
-            <h3 style="margin:10px 0 6px; text-transform:uppercase;">Grupni treninzi</h3>
-            <p style="margin:0;color:var(--muted);font-size:14px;">Struktura, energija i disciplina — sa trenerom koji vodi tempo.</p>
+            <h3 style="margin:10px 0 6px; text-transform:uppercase;">Group Training</h3>
+            <p style="margin:0;color:var(--muted);font-size:14px;">Coach-led sessions with structure, energy, and clear progressions.</p>
           </div>
+
           <div class="card reveal">
-            <span class="pill">1 na 1</span>
-            <h3 style="margin:10px 0 6px; text-transform:uppercase;">Personal training</h3>
-            <p style="margin:0;color:var(--muted);font-size:14px;">Najbrži put do cilja: forma, progres, korekcije, praćenje.</p>
+            <span class="pill">1:1 coaching</span>
+            <h3 style="margin:10px 0 6px; text-transform:uppercase;">Personal Training</h3>
+            <p style="margin:0;color:var(--muted);font-size:14px;">A tailored plan with frequent feedback, form fixes, and accountability.</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- SCHEDULE -->
-    <section id="raspored">
+    <section id="schedule">
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <h2>Raspored</h2>
-            <p>Filter po danu — čisto i profesionalno (klijent odmah vidi organizaciju).</p>
+            <h2>Schedule</h2>
+            <p>Filter by day to quickly find the right session.</p>
           </div>
-          <span class="pill">Primer rasporeda</span>
+          <span class="pill">Weekly classes</span>
         </div>
 
-        <div class="toolbar reveal" role="toolbar" aria-label="Filter rasporeda">
-          <button class="chipbtn" type="button" data-day="all" aria-pressed="true">Svi</button>
-          <button class="chipbtn" type="button" data-day="pon" aria-pressed="false">Pon</button>
-          <button class="chipbtn" type="button" data-day="uto" aria-pressed="false">Uto</button>
-          <button class="chipbtn" type="button" data-day="sre" aria-pressed="false">Sre</button>
-          <button class="chipbtn" type="button" data-day="cet" aria-pressed="false">Čet</button>
-          <button class="chipbtn" type="button" data-day="pet" aria-pressed="false">Pet</button>
-          <button class="chipbtn" type="button" data-day="sub" aria-pressed="false">Sub</button>
+        <div class="toolbar reveal" role="toolbar" aria-label="Schedule filter">
+          <button class="chipbtn" type="button" data-day="all" aria-pressed="true">All</button>
+          <button class="chipbtn" type="button" data-day="mon" aria-pressed="false">Mon</button>
+          <button class="chipbtn" type="button" data-day="tue" aria-pressed="false">Tue</button>
+          <button class="chipbtn" type="button" data-day="wed" aria-pressed="false">Wed</button>
+          <button class="chipbtn" type="button" data-day="thu" aria-pressed="false">Thu</button>
+          <button class="chipbtn" type="button" data-day="fri" aria-pressed="false">Fri</button>
+          <button class="chipbtn" type="button" data-day="sat" aria-pressed="false">Sat</button>
         </div>
 
         <div class="classes" id="classGrid">
-          <div class="card class-item reveal" data-day="pon">
-            <span class="pill">18:00</span>
+          <div class="card class-item reveal" data-day="mon">
+            <span class="pill">6:00 PM</span>
             <b>Strength Fundamentals</b>
-            <p>Tehnika + osnovne vežbe. Idealno za početnike.</p>
+            <p>Technique, basics, and a clear progression for beginners.</p>
             <div class="class-meta">
-              <span class="pill">Coach: Marko</span><span class="pill">60 min</span><span class="pill">Snaga</span>
+              <span class="pill">Coach: Mark</span><span class="pill">60 min</span><span class="pill">Strength</span>
             </div>
           </div>
 
-          <div class="card class-item reveal" data-day="uto">
-            <span class="pill">19:00</span>
+          <div class="card class-item reveal" data-day="tue">
+            <span class="pill">7:00 PM</span>
             <b>HIIT Conditioning</b>
-            <p>Intervali + circuit. Brzo, efikasno, skalirano po nivou.</p>
+            <p>Intervals and circuits with scalable intensity for all levels.</p>
             <div class="class-meta">
-              <span class="pill">Coach: Ana</span><span class="pill">45 min</span><span class="pill">Funkcionalna</span>
+              <span class="pill">Coach: Ana</span><span class="pill">45 min</span><span class="pill">Conditioning</span>
             </div>
           </div>
 
-          <div class="card class-item reveal" data-day="sre">
-            <span class="pill">18:30</span>
+          <div class="card class-item reveal" data-day="wed">
+            <span class="pill">6:30 PM</span>
             <b>Hypertrophy Focus</b>
-            <p>Volumen + tempo + progres. Za srednji/napredni nivo.</p>
+            <p>Volume, tempo, and structure for building muscle and strength.</p>
             <div class="class-meta">
-              <span class="pill">Coach: Luka</span><span class="pill">60 min</span><span class="pill">Snaga</span>
+              <span class="pill">Coach: Luke</span><span class="pill">60 min</span><span class="pill">Hypertrophy</span>
             </div>
           </div>
 
-          <div class="card class-item reveal" data-day="cet">
-            <span class="pill">19:30</span>
+          <div class="card class-item reveal" data-day="thu">
+            <span class="pill">7:30 PM</span>
             <b>Core & Mobility</b>
-            <p>Stabilnost + mobilnost + oporavak. Prevencija povreda.</p>
+            <p>Stability, mobility, and recovery work to stay resilient.</p>
             <div class="class-meta">
               <span class="pill">Coach: Ana</span><span class="pill">45 min</span><span class="pill">Mobility</span>
             </div>
           </div>
 
-          <div class="card class-item reveal" data-day="pet">
-            <span class="pill">18:00</span>
+          <div class="card class-item reveal" data-day="fri">
+            <span class="pill">6:00 PM</span>
             <b>Full Body Power</b>
-            <p>Snaga + eksplozivnost + finisher. Odličan “kraj nedelje”.</p>
+            <p>Strength + explosive work, finished with a conditioning block.</p>
             <div class="class-meta">
-              <span class="pill">Coach: Marko</span><span class="pill">60 min</span><span class="pill">Power</span>
+              <span class="pill">Coach: Mark</span><span class="pill">60 min</span><span class="pill">Power</span>
             </div>
           </div>
 
-          <div class="card class-item reveal" data-day="sub">
-            <span class="pill">11:00</span>
+          <div class="card class-item reveal" data-day="sat">
+            <span class="pill">11:00 AM</span>
             <b>Small Group Bootcamp</b>
-            <p>Grupni trening sa energijom. Pogodno za sve nivoe.</p>
+            <p>Team energy, structure, and a session that hits everything.</p>
             <div class="class-meta">
-              <span class="pill">Coach: Luka</span><span class="pill">60 min</span><span class="pill">Bootcamp</span>
+              <span class="pill">Coach: Luke</span><span class="pill">60 min</span><span class="pill">Bootcamp</span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- TRAINERS -->
-    <section id="treneri">
+    <!-- COACHES -->
+    <section id="coaches">
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <h2>Treneri</h2>
-            <p>Trust sekcija — lica i specijalizacije (ovde obavezno stavi prave slike).</p>
+            <h2>Coaches</h2>
+            <p>Experienced coaches focused on technique, progression, and consistency.</p>
           </div>
-          <span class="pill">Sertifikati • Iskustvo</span>
+          <span class="pill">Certified • Experienced</span>
         </div>
 
         <div class="grid3">
           <article class="card trainer reveal">
             <div class="imgwrap">
-              <!-- ✅ UBACI SLIKU: assets/trainer-1.jpg -->
-              <img src="assets/trainer-1.jpg" alt="Trener Marko" />
+              <img src="assets/trainer-1.jpg" alt="Coach Mark" />
             </div>
             <div class="body">
-              <h3>Marko Jovanović</h3>
-              <p>Snaga i tehnika. Progres bez povreda.</p>
+              <h3>Mark Johnson</h3>
+              <p>Strength coaching with a focus on technique and long-term progression.</p>
               <div class="row"><span class="pill">Strength</span><span class="pill">Technique</span><span class="pill">Coaching</span></div>
             </div>
           </article>
 
           <article class="card trainer reveal">
             <div class="imgwrap">
-              <!-- ✅ UBACI SLIKU: assets/trainer-2.jpg -->
-              <img src="assets/trainer-2.jpg" alt="Trenerka Ana" />
+              <img src="assets/trainer-2.jpg" alt="Coach Ana" />
             </div>
             <div class="body">
-              <h3>Ana Petrović</h3>
-              <p>Kondicija i mobilnost. HIIT + oporavak.</p>
+              <h3>Ana Petrovic</h3>
+              <p>Conditioning, mobility, and sustainable training habits.</p>
               <div class="row"><span class="pill">HIIT</span><span class="pill">Mobility</span><span class="pill">Conditioning</span></div>
             </div>
           </article>
 
           <article class="card trainer reveal">
             <div class="imgwrap">
-              <!-- ✅ UBACI SLIKU: assets/trainer-3.jpg -->
-              <img src="assets/trainer-3.jpg" alt="Trener Luka" />
+              <img src="assets/trainer-3.jpg" alt="Coach Luke" />
             </div>
             <div class="body">
-              <h3>Luka Ilić</h3>
-              <p>Hypertrophy i grupni treninzi. Struktura i motivacija.</p>
-              <div class="row"><span class="pill">Hypertrophy</span><span class="pill">Small group</span><span class="pill">Program</span></div>
+              <h3>Luke Ilic</h3>
+              <p>Hypertrophy and group training with clear structure and feedback.</p>
+              <div class="row"><span class="pill">Hypertrophy</span><span class="pill">Group</span><span class="pill">Programming</span></div>
             </div>
           </article>
         </div>
       </div>
     </section>
 
-    <!-- PRICING -->
-    <section id="clanarine">
+    <!-- MEMBERSHIPS -->
+    <section id="memberships">
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <h2>Članarine</h2>
-            <p>Toggle mesečno/godišnje — premium detalj.</p>
+            <h2>Memberships</h2>
+            <p>Pick a plan that fits your schedule and coaching needs.</p>
           </div>
 
-          <div class="toggle reveal" aria-label="Promena plana">
-            <span>Mesečno</span>
-            <div class="switch" id="billingSwitch" role="switch" aria-checked="false" tabindex="0" aria-label="Prebaci na godišnje">
+          <div class="toggle reveal" aria-label="Billing period">
+            <span>Monthly</span>
+            <div class="switch" id="billingSwitch" role="switch" aria-checked="false" tabindex="0" aria-label="Toggle yearly billing">
               <div class="knob" aria-hidden="true"></div>
             </div>
-            <span>Godišnje <span class="pill" style="margin-left:6px;">-15%</span></span>
+            <span>Yearly <span class="pill" style="margin-left:6px;">Save 15%</span></span>
           </div>
         </div>
 
         <div class="grid3">
           <div class="card price reveal" data-month="1990" data-year="20300">
-            <span class="pill">Start</span>
+            <span class="pill">Starter</span>
             <h3>Basic</h3>
-            <div class="amount"><span class="priceVal">1.990</span> RSD</div>
-            <div class="per"><span class="perVal">/ mesečno</span></div>
+            <div class="amount"><span class="priceVal">1,990</span> RSD</div>
+            <div class="per"><span class="perVal">/ month</span></div>
             <ul>
-              <li>Neograničen pristup spravama</li>
-              <li>1 procena forme (primer)</li>
-              <li>Osnovni plan treninga</li>
+              <li>Full gym access</li>
+              <li>Initial assessment</li>
+              <li>Basic training plan</li>
             </ul>
-            <a class="btn primary cta" href="#kontakt">Izaberi Basic</a>
+            <a class="btn primary cta" href="#contact">Choose Basic</a>
           </div>
 
           <div class="card price reveal" style="border-color:rgba(182,255,77,.30);" data-month="2990" data-year="30500">
-            <span class="pill">Najpopularnije</span>
+            <span class="pill">Most Popular</span>
             <h3>Plus</h3>
-            <div class="amount"><span class="priceVal">2.990</span> RSD</div>
-            <div class="per"><span class="perVal">/ mesečno</span></div>
+            <div class="amount"><span class="priceVal">2,990</span> RSD</div>
+            <div class="per"><span class="perVal">/ month</span></div>
             <ul>
-              <li>Sve iz Basic</li>
-              <li>2 grupna treninga nedeljno</li>
-              <li>Praćenje napretka (mesečno)</li>
+              <li>Everything in Basic</li>
+              <li>2 group sessions per week</li>
+              <li>Progress check-ins</li>
             </ul>
-            <a class="btn primary cta" href="#kontakt">Izaberi Plus</a>
+            <a class="btn primary cta" href="#contact">Choose Plus</a>
           </div>
 
           <div class="card price reveal" data-month="4990" data-year="50900">
             <span class="pill">Pro</span>
             <h3>Elite</h3>
-            <div class="amount"><span class="priceVal">4.990</span> RSD</div>
-            <div class="per"><span class="perVal">/ mesečno</span></div>
+            <div class="amount"><span class="priceVal">4,990</span> RSD</div>
+            <div class="per"><span class="perVal">/ month</span></div>
             <ul>
-              <li>Sve iz Plus</li>
-              <li>1 personal trening nedeljno</li>
-              <li>Plan ishrane (osnovni)</li>
+              <li>Everything in Plus</li>
+              <li>1 personal session per week</li>
+              <li>Advanced programming support</li>
             </ul>
-            <a class="btn primary cta" href="#kontakt">Izaberi Elite</a>
+            <a class="btn primary cta" href="#contact">Choose Elite</a>
           </div>
         </div>
-
-        <p class="hint reveal" style="margin-top:14px;">* Cene su primer. Zameni realnim.</p>
       </div>
     </section>
 
     <!-- GALLERY -->
-    <section id="galerija">
+    <section id="gallery">
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <h2>Galerija</h2>
-            <p>Klik na sliku → lightbox (uvećanje).</p>
+            <h2>Gallery</h2>
+            <p>A quick look at the space, equipment, and training environment.</p>
           </div>
-          <span class="pill">assets/gallery-*.jpg</span>
+          <span class="pill">Facility photos</span>
         </div>
 
         <div class="gallery">
-          <!-- ✅ UBACI SLIKE: assets/gallery-1.jpg ... gallery-6.jpg -->
-          <figure class="g-item reveal" data-full="assets/gallery-1.jpg"><img src="assets/gallery-1.jpg" alt="Teretana - slika 1"></figure>
-          <figure class="g-item reveal" data-full="assets/gallery-2.jpg"><img src="assets/gallery-2.jpg" alt="Teretana - slika 2"></figure>
-          <figure class="g-item reveal" data-full="assets/gallery-3.jpg"><img src="assets/gallery-3.jpg" alt="Teretana - slika 3"></figure>
-          <figure class="g-item reveal" data-full="assets/gallery-4.jpg"><img src="assets/gallery-4.jpg" alt="Teretana - slika 4"></figure>
-          <figure class="g-item reveal" data-full="assets/gallery-5.jpg"><img src="assets/gallery-5.jpg" alt="Teretana - slika 5"></figure>
-          <figure class="g-item reveal" data-full="assets/gallery-6.jpg"><img src="assets/gallery-6.jpg" alt="Teretana - slika 6"></figure>
+          <figure class="g-item reveal" data-full="assets/gallery-1.jpg"><img src="assets/gallery-1.jpg" alt="Gym photo 1"></figure>
+          <figure class="g-item reveal" data-full="assets/gallery-2.jpg"><img src="assets/gallery-2.jpg" alt="Gym photo 2"></figure>
+          <figure class="g-item reveal" data-full="assets/gallery-3.jpg"><img src="assets/gallery-3.jpg" alt="Gym photo 3"></figure>
+          <figure class="g-item reveal" data-full="assets/gallery-4.jpg"><img src="assets/gallery-4.jpg" alt="Gym photo 4"></figure>
+          <figure class="g-item reveal" data-full="assets/gallery-5.jpg"><img src="assets/gallery-5.jpg" alt="Gym photo 5"></figure>
+          <figure class="g-item reveal" data-full="assets/gallery-6.jpg"><img src="assets/gallery-6.jpg" alt="Gym photo 6"></figure>
         </div>
       </div>
     </section>
 
-    <!-- CONTACT (NETLIFY FORMS) -->
-    <section id="kontakt">
+    <!-- CONTACT -->
+    <section id="contact">
       <div class="container">
         <div class="section-head reveal">
           <div>
-            <h2>Kontakt</h2>
-            <p>Ova forma sada šalje poruku preko Netlify Forms (bez backend-a).</p>
+            <h2>Contact</h2>
+            <p>Send a message and we’ll get back to you with next steps.</p>
           </div>
-          <span class="pill">Netlify Forms</span>
+          <span class="pill">Fast response</span>
         </div>
 
         <div class="contact">
           <div class="card reveal">
-            <h3 style="margin:0 0 6px; text-transform:uppercase;">Pošalji upit</h3>
+            <h3 style="margin:0 0 6px; text-transform:uppercase;">Send a message</h3>
             <p style="margin:0;color:var(--muted);font-size:14px;">
-              Kad sajt bude na Netlify-ju, poruke stižu u Netlify dashboard + možeš email notifikacije.
+              We’ll reply to your email as soon as possible.
             </p>
 
-            <!-- ✅ NETLIFY FORMS:
-                 - data-netlify="true" + name + hidden form-name
-                 - honeypot protiv spama
-                 - action vraća na istu stranu sa ?sent=1 -->
             <form name="ironvault-contact"
                   method="POST"
                   data-netlify="true"
                   netlify-honeypot="bot-field"
-                  action="/?sent=1#kontakt">
+                  action="/?sent=1#contact">
 
               <input type="hidden" name="form-name" value="ironvault-contact" />
 
-              <!-- Honeypot (ne prikazuje se korisniku) -->
               <p class="sr-only">
                 <label>Don’t fill this out: <input name="bot-field" /></label>
               </p>
 
-              <label for="name">Ime</label>
-              <input id="name" name="name" autocomplete="name" placeholder="Npr. Marko" required />
+              <label for="name">Name</label>
+              <input id="name" name="name" autocomplete="name" placeholder="John" required />
 
               <label for="email">Email</label>
-              <input id="email" name="email" type="email" autocomplete="email" placeholder="marko@email.com" required />
+              <input id="email" name="email" type="email" autocomplete="email" placeholder="john@email.com" required />
 
-              <label for="phone">Telefon</label>
-              <input id="phone" name="phone" autocomplete="tel" placeholder="+381..." />
+              <label for="phone">Phone</label>
+              <input id="phone" name="phone" autocomplete="tel" placeholder="+1..." />
 
-              <label for="interest">Zanima me</label>
+              <label for="interest">Interested in</label>
               <select id="interest" name="interest">
                 <option>Basic</option>
                 <option selected>Plus</option>
                 <option>Elite</option>
                 <option>Personal training</option>
-                <option>Grupni treninzi</option>
+                <option>Group training</option>
               </select>
 
-              <label for="message">Poruka</label>
-              <textarea id="message" name="message" placeholder="Cilj, iskustvo, željeni termin..." required></textarea>
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell us your goal and preferred training time..." required></textarea>
 
               <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
-                <button class="btn primary" type="submit">Pošalji poruku</button>
-                <button class="btn" type="reset">Obriši</button>
+                <button class="btn primary" type="submit">Send Message</button>
+                <button class="btn" type="reset">Reset</button>
               </div>
 
-              <div class="success" id="successBox">✅ Poruka je poslata! Javićemo se uskoro.</div>
-
-              <p class="hint">
-                Napomena: lokalno (otvoren index.html) Netlify forma ne radi. Radi tek nakon deploy-a na Netlify.
-              </p>
+              <div class="success" id="successBox">✅ Message sent — we’ll reply soon.</div>
             </form>
           </div>
 
           <div class="card reveal">
-            <h3 style="margin:0 0 6px; text-transform:uppercase;">FAQ</h3>
-            <div class="faq" style="display:grid;gap:10px;margin-top:12px;">
-              <details>
-                <summary>Da li imate probni trening?</summary>
-                <p>Da, probni trening je moguć (primer). Napiši cilj i iskustvo u poruci.</p>
-              </details>
-              <details>
-                <summary>Kako izgleda upis?</summary>
-                <p>Pošalješ upit, dogovorimo termin, procena i start programa.</p>
-              </details>
-              <details>
-                <summary>Da li dobijam plan treninga?</summary>
-                <p>Uz Plus/Elite dobijaš osnovni plan i praćenje (primer). Personal je detaljniji.</p>
-              </details>
-            </div>
+            <h3 style="margin:0 0 6px; text-transform:uppercase;">Location</h3>
+            <p style="margin:0;color:var(--muted);font-size:14px;">
+              IRONVAULT GYM<br/>
+              Your street address<br/>
+              Hours: 7:00 AM – 11:00 PM
+            </p>
 
             <div class="divider"></div>
 
-            <h3 style="margin:0 0 6px; text-transform:uppercase;">Lokacija</h3>
-            <p style="margin:0;color:var(--muted);font-size:14px;">
-              IRONVAULT GYM, Ulica 12, Beograd (primer)<br/>
-              Radno vreme: 07–23 (primer)
-            </p>
-
-            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px;">
-              <a class="btn primary" href="#clanarine">Izaberi članarinu</a>
-              <a class="btn" href="#raspored">Pogledaj raspored</a>
+            <h3 style="margin:0 0 6px; text-transform:uppercase;">Quick links</h3>
+            <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:12px;">
+              <a class="btn primary" href="#memberships">Memberships</a>
+              <a class="btn" href="#schedule">Schedule</a>
+              <a class="btn" href="#programs">Programs</a>
             </div>
           </div>
         </div>
-      </div>
 
-      <!-- Lightbox -->
-      <div class="lightbox" id="lightbox" aria-hidden="true" aria-label="Prikaz slike">
-        <div class="box">
-          <button class="close" type="button" id="lbClose" aria-label="Zatvori">
-            <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-          </button>
-          <img id="lbImg" src="" alt="Uvećana slika" />
+        <!-- Lightbox -->
+        <div class="lightbox" id="lightbox" aria-hidden="true" aria-label="Image preview">
+          <div class="box">
+            <button class="close" type="button" id="lbClose" aria-label="Close">
+              <svg class="icon" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <path d="M6 6l12 12M18 6 6 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </button>
+            <img id="lbImg" src="" alt="Preview" />
+          </div>
         </div>
       </div>
     </section>
+    <section id="faq">
+  <div class="container">
+    <div class="section-head reveal">
+      <div>
+        <h2>FAQ</h2>
+        <p>Quick answers to the most common questions.</p>
+      </div>
+      <span class="pill">Support</span>
+    </div>
+
+    <div class="grid2">
+      <details class="card reveal faq">
+        <summary>
+          Do I need experience to start?
+          <span class="pill">Beginner friendly</span>
+        </summary>
+        <p>Not at all. We’ll assess your current level and guide you through technique and progression from day one.</p>
+      </details>
+
+      <details class="card reveal faq">
+        <summary>
+          Can I try a session before joining?
+          <span class="pill">Yes</span>
+        </summary>
+        <p>Absolutely. Send us a message and we’ll schedule a visit or a trial session based on availability.</p>
+      </details>
+
+      <details class="card reveal faq">
+        <summary>
+          What should I bring?
+          <span class="pill">Essentials</span>
+        </summary>
+        <p>Training shoes, a water bottle, and comfortable clothing. Towels are recommended.</p>
+      </details>
+
+      <details class="card reveal faq">
+        <summary>
+          Are memberships cancelable?
+          <span class="pill">Flexible</span>
+        </summary>
+        <p>Yes. Plans can be changed or canceled depending on your billing period. Contact us and we’ll help you out.</p>
+      </details>
+
+      <details class="card reveal faq">
+        <summary>
+          Do you offer personal training?
+          <span class="pill">1:1 coaching</span>
+        </summary>
+        <p>Yes. Personal training is available with tailored programming and regular progress check-ins.</p>
+      </details>
+
+      <details class="card reveal faq">
+        <summary>
+          How busy is the gym?
+          <span class="pill">Peak hours</span>
+        </summary>
+        <p>Evenings are typically busier. If you prefer a quieter session, late mornings and early afternoons are best.</p>
+      </details>
+    </div>
+  </div>
+</section>
   </main>
 
   <footer>
     <div class="container">
       <div class="foot">
-        <span>© <span id="year"></span> IRONVAULT GYM. Sva prava zadržana.</span>
+        <span>© <span id="year"></span> IRONVAULT GYM. All rights reserved.</span>
         <span style="display:flex;gap:10px;flex-wrap:wrap;">
-          <a class="btn" href="#top">Nazad na vrh</a>
+          <a class="btn" href="#top">Back to top</a>
         </span>
       </div>
     </div>
@@ -1104,6 +1192,15 @@
 
     // Year
     $("#year").textContent = new Date().getFullYear();
+
+    // Header "scrolled" state so it always looks visible on scroll
+    const header = document.getElementById("siteHeader");
+    const onScroll = () => {
+      if (window.scrollY > 8) header.classList.add("scrolled");
+      else header.classList.remove("scrolled");
+    };
+    window.addEventListener("scroll", onScroll, { passive: true });
+    onScroll();
 
     // Theme (persist)
     const themeBtn = $("#themeBtn");
@@ -1175,7 +1272,7 @@
         const y = parseInt(card.dataset.year, 10);
         const val = yearly ? y : m;
         card.querySelector(".priceVal").textContent = formatRSD(val);
-        card.querySelector(".perVal").textContent = yearly ? "/ godišnje" : "/ mesečno";
+        card.querySelector(".perVal").textContent = yearly ? "/ year" : "/ month";
       });
     }
     function toggleBilling(){
@@ -1210,12 +1307,11 @@
     lightbox.addEventListener("click", (e) => { if (e.target === lightbox) closeLightbox(); });
     document.addEventListener("keydown", (e) => { if (e.key === "Escape" && lightbox.classList.contains("open")) closeLightbox(); });
 
-    // Success message (after Netlify redirect to ?sent=1#kontakt)
+    // Success message (after Netlify redirect to ?sent=1#contact)
     const params = new URLSearchParams(window.location.search);
     if (params.get("sent") === "1") {
       const box = document.getElementById("successBox");
       if (box) box.style.display = "block";
-      // clean URL (optional)
       const clean = window.location.pathname + window.location.hash;
       window.history.replaceState({}, "", clean);
     }
